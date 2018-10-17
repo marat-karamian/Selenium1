@@ -13,7 +13,7 @@ public class ResizeWindow {
     static WebDriver driver;
 
     @Before
-    public void setUp() {
+    public void setDriver() {
         DriverConfig driverConfig = new DriverConfig();
         driverConfig.firefox();
         driver = new FirefoxDriver();

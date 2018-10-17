@@ -15,7 +15,7 @@ public class WindowSwitch {
     static WebDriver driver;
 
     @Before
-    public void setUp() {
+    public void setDriver() {
         DriverConfig driverConfig = new DriverConfig();
         driverConfig.chrome();
         driver = new ChromeDriver();
