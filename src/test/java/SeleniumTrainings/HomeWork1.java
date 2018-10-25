@@ -1,8 +1,6 @@
 package SeleniumTrainings;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,8 +13,8 @@ public class HomeWork1 {
 
     static WebDriver driver;
 
-    @Before
-    public void setDriver() {
+    @BeforeClass
+    public static void setDriver() {
         DriverConfig driverConfig = new DriverConfig();
         driverConfig.chrome();
         ChromeOptions options = new ChromeOptions();
@@ -54,8 +52,8 @@ public class HomeWork1 {
         }
     }
 
-    @After
-    public void quit() {
+    @AfterClass
+    public static void quit() {
         driver.quit();
     }
 }
