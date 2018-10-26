@@ -13,8 +13,8 @@ public class GetAttributes {
 
     @BeforeClass
     public static void setUp() {
-        DriverConfig driverConfig = new DriverConfig();
-        driverConfig.chrome();
+        DriverConfigs driverConfigs = new DriverConfigs();
+        driverConfigs.chrome();
         driver = new ChromeDriver();
         driver.get("http://www.google.com");
     }

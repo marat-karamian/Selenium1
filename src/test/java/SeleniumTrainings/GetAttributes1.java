@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class GetAttributes1 {
+public class GetAttributes1 extends DriverConfigs {
 
     static WebDriver driver;
     private By bySearchButton = By.name("btnK");
@@ -14,8 +14,8 @@ public class GetAttributes1 {
     @BeforeClass
 
     public static void setUp() {
-        DriverConfig driverConfig = new DriverConfig();
-        driverConfig.chrome();
+        DriverConfigs driverConfigs = new DriverConfigs();
+        driverConfigs.chrome();
         driver = new ChromeDriver();
         driver.get("http://www.google.com");
     }

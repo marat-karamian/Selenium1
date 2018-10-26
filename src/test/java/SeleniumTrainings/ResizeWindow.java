@@ -14,8 +14,8 @@ public class ResizeWindow {
 
     @Before
     public void setDriver() {
-        DriverConfig driverConfig = new DriverConfig();
-        driverConfig.firefox();
+        DriverConfigs driverConfigs = new DriverConfigs();
+        driverConfigs.firefox();
         driver = new FirefoxDriver();
     }
 

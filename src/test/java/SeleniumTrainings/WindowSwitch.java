@@ -16,8 +16,8 @@ public class WindowSwitch {
 
     @Before
     public void setDriver() {
-        DriverConfig driverConfig = new DriverConfig();
-        driverConfig.chrome();
+        DriverConfigs driverConfigs = new DriverConfigs();
+        driverConfigs.chrome();
         driver = new ChromeDriver();
     }
 
