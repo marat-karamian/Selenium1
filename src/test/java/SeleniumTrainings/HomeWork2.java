@@ -3,6 +3,7 @@ package SeleniumTrainings;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.openqa.selenium.*;
+import org.openqa.selenium.OutputType;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,21 +16,21 @@ public class HomeWork2 {
         DriverConfigs driverConfigs = new DriverConfigs();
         driverConfigs.chrome();
 
-        driverConfigs.driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driverConfigs.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         driverConfigs.driver.get("https://en.wikipedia.org/wiki/Main_Page");
 
         WebElement didYouKnow = driverConfigs.driver.findElement(By.xpath("//*[@id='mp-dyk']//img"));
 
-        File scr1 = (didYouKnow).getScreenshotAs(OutputType.FILE);
+        File scr1 = didYouKnow.getScreenshotAs(OutputType.FILE);
 
-        FileUtils.copyFile(scr1, new File("E:\\Java\\didYouKnow.png"));
+        FileUtils.copyFile(scr1, new File("didYouKnow.png"));
 
         WebElement inTheNews = driverConfigs.driver.findElement(By.id("mp-itn"));
 
         File scr2 = inTheNews.getScreenshotAs(OutputType.FILE);
 
-        FileUtils.copyFile(scr2, new File("E:\\Java\\inTheNews.png"));
+        FileUtils.copyFile(scr2, new File("inTheNews.png"));
 
         driverConfigs.driver.quit();
     }

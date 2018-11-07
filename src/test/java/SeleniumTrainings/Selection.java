@@ -26,10 +26,9 @@ public class Selection {
         Thread.sleep(2000);
 
         List<WebElement> options = oSelect.getOptions();
-        int size = options.size();
-        System.out.println(size);
+        System.out.println(options.size());
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < options.size(); i++) {
             oSelect.selectByIndex(i);
             String value = options.get(i).getText();
             System.out.println(value);
