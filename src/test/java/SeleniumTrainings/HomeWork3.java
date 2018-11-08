@@ -10,9 +10,11 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +25,7 @@ public class HomeWork3 {
     @BeforeClass
     public static void setUp() {
         driverConfigs.chromeOptions();
-        //driverConfigs.driver.manage().window().maximize();
+        driverConfigs.driver.manage().window().maximize();
         driverConfigs.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driverConfigs.driver.get("https://www.google.com/");
     }
@@ -34,7 +36,7 @@ public class HomeWork3 {
         searchBox.clear();
         searchBox.sendKeys("selenium automation testing");
         searchBox.submit();
-        WebElement wait = (new WebDriverWait(driverConfigs.driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("resultStats")));
+        WebElement searchResults = (new WebDriverWait(driverConfigs.driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='rso']")));
 
         WebElement languageChoice = driverConfigs.driver.findElement(By.xpath("//*[@id=\"Rzn5id\"]/div/a[1]"));
         boolean isDisplayed = languageChoice.isDisplayed();
@@ -43,24 +45,31 @@ public class HomeWork3 {
             languageChoice.click();
         }
 
-        List<WebElement> searchResults = driverConfigs.driver.findElements(By.tagName("a"));
+        List<WebElement> links = searchResults.findElements(By.tagName("a"));
 
         boolean isPresent = false;
 
-        for (WebElement searchResult : searchResults) {
-            if (searchResult.getText().contains("seleniumhq.org")) {
-                isPresent = true;
+            if (driverConfigs.driver.findElements(By.cssSelector("[valign=top] > td > a[aria-label=\"Page 1\"]")).size() == 0) {
+                for (WebElement desiredLink : links) {
+                    if (desiredLink.getText().contains("seleniumhq.org")) {
+                        isPresent = true;
+                    }
+                }
+                if (isPresent) {
+                    WebElement search = driverConfigs.driver.findElement(By.xpath("//*[@id='rso']"));
+                    File scr = search.getScreenshotAs(OutputType.FILE);
+                    FileUtils.copyFile(scr, new File("SeleniumHQscreenshot.png"));
+                    System.out.println("The page number of the search results is 1");
+                } else {
+                    System.out.println("Result is not found on the 1st page");
+                }
             }
-        }
-        if (isPresent) {
-            WebElement search = driverConfigs.driver.findElement(By.xpath("//*[@id='rso']"));
-            File scr = search.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scr, new File("SeleniumHQscreenshot.png"));
-        } else {
-            System.out.println("Result is not found on the 1st page");
-        }
     }
 
+    @Test
+    public void isLocatedFurtherThan10thPage() {
+
+    }
 
     @AfterClass
     public static void tearDown() {
